@@ -115,3 +115,4 @@ $$ $$
 $$ $$
 \bar{y} = \hat{\beta_0} + \hat{\beta_1} \cdot \bar{x}
 $$
+asdasd
