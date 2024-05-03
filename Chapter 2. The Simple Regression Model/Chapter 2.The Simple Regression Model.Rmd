@@ -1,7 +1,6 @@
 ---
 title: "Chapter 2. The Simple Regression ModelModel"
-output:
-  rmarkdown::github_document
+output: github_document
   
 editor_options:
   markdown:
