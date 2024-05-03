@@ -1,8 +1,8 @@
 ---
 title: "Chapter 2. The Simple Regression ModelModel"
 output:
-  html_notebook: default
-  pdf_document: default
+  rmarkdown::github_document
+  
 editor_options:
   markdown:
     wrap: 72
