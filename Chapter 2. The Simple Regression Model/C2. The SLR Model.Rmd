@@ -1,6 +1,6 @@
 ---
 title: "C2. The SLR Model"
-output: rmarkdown::github_document
+output: html_notebook
 date: "2024-05-03"
 ---
 
