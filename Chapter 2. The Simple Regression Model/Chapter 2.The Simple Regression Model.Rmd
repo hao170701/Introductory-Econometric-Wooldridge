@@ -1,0 +1,117 @@
+---
+title: "Chapter 2. The Simple Regression ModelModel"
+output:
+  html_notebook: default
+  pdf_document: default
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+## 2.1 Simple linear regression
+
+We are concerned with estimating the population parameters $β_0$ and
+$β_1$ of the simple linear regression model $$
+y = \beta_0 + \beta_1 + \mu
+$$ from a random sample of $y$ and $x$. According to Wooldridge (2019,
+Section 2.2), the ordinary least squares (OLS) estimators are $$
+\hat{\beta}_0 = \bar{y} + \hat{\beta}_1x
+$$ $$
+\hat{\beta}_1 = \frac{Cov(x, y)}{Var(x)}
+$$ Based on these estimated parameters, the OLS regression line is $$
+y = \hat{\beta}_0 + \hat{\beta}_1
+$$
+
+### Wooldridge, Example 2.3: CEO Salary and Return on Equity
+
+```{r}
+library(wooldridge)
+```
+
+```{r message=FALSE}
+data(ceosal1, package='wooldridge')
+attach(ceosal1)
+
+# manual calculation of OLS coefficients
+b1hat <- cov(roe,salary)/var(roe)
+b0hat <- mean(salary) - b1hat*mean(roe) 
+cat(paste('b0_hat: ', b0hat, '\nb1_hat: ', b1hat))
+
+# "detach" the data frame
+detach(ceosal1)
+```
+
+Finally, the parameter estimates are calculated. So the OLS regression
+line is $$
+\hat{salary} = 963.1 + 18.5 roe
+$$ The regression results in a variable CEOregres and then use it as an
+argument to abline to add the regression line to the scatter plot
+
+```{r}
+data(ceosal1, package='wooldridge')
+# OLS regression
+CEOregres <- lm( salary ~ roe, data=ceosal1 )
+# Scatter plot (restrict y axis limits)
+with(ceosal1, plot(roe, salary, ylim=c(0,4000)))
+# Add OLS regression line
+abline(CEOregres)
+```
+
+### Wooldridge, Example 2.4: Wage and Education
+
+```{r}
+data(wage1,package='wooldridge')
+#OLSregression:
+lm(wage~educ,data=wage1)
+```
+
+### Wooldridge, Example 2.5: Voting Outcomes and Campaign Expenditures
+
+$$
+voteA = \beta_0 +\beta_1 shareA + u
+$$
+
+```{r}
+data(vote1, package='wooldridge')
+vote_reg = lm(voteA ~ shareA, data = vote1)
+with(vote1, plot(shareA, voteA))
+abline(vote_reg)
+```
+
+## 2.2 Coefficients, Fitted Values and Residuals
+
+##### Coefficients
+
+```{r}
+vote_reg$coefficients
+```
+
+##### Fitted Value $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_1$
+
+##### Residual $\hat{u_i} = y_i - \hat{y_i}$
+
+### Example 2.6: CEO Salary and Return on Equity
+
+```{r}
+data(ceosal1, package='wooldridge')
+# extract variables as vectors:
+sal <- ceosal1$salary
+roe <- ceosal1$roe
+# regression with vectors:
+CEOregres <- lm( sal ~ roe )
+# obtain predicted values and residuals
+sal.hat <- fitted(CEOregres)
+u.hat <- resid(CEOregres)
+# Wooldridge, Table 2.2:
+cbind(roe, sal, sal.hat, u.hat)[1:15,]
+```
+
+### Three properties of OLS statistic
+
+$$
+\sum_{i=1}^{n} {u_i} = 0 \rightarrow \bar{\hat{u_i}} = 0
+$$ $$
+\sum_{i=1}^{n} {x_i \hat{u_i}} =0 \rightarrow Cov(x_i,\hat{u_i}) = 0
+$$ $$
+\bar{y} = \hat{\beta_0} + \hat{\beta_1} \cdot \bar{x}
+$$
