@@ -1773,209 +1773,108 @@ y = \hat{\beta}_0 + \hat{\beta}_1
 <h3>Wooldridge, Example 2.3: CEO Salary and Return on Equity</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeSh3b29sZHJpZGdlKVxuYGBgXG5gYGAifQ== -->
-<pre class="r"><code>```r
-library(wooldridge)</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbmF0dGFjaChjZW9zYWwxKVxuXG4jIG1hbnVhbCBjYWxjdWxhdGlvbiBvZiBPTFMgY29lZmZpY2llbnRzXG5iMWhhdCA8LSBjb3Yocm9lLHNhbGFyeSkvdmFyKHJvZSlcbmIwaGF0IDwtIG1lYW4oc2FsYXJ5KSAtIGIxaGF0Km1lYW4ocm9lKSBcbmNhdChwYXN0ZSgnYjBfaGF0OiAnLCBiMGhhdCwgJ1xcbmIxX2hhdDogJywgYjFoYXQpKVxuYGBgXG5gYGAifQ== --&gt;
-
-```r
-```r
-data(ceosal1, package=&#39;wooldridge&#39;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh3b29sZHJpZGdlKVxuYGBgIn0= -->
+<pre class="r"><code>library(wooldridge)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbmF0dGFjaChjZW9zYWwxKVxuXG4jIG1hbnVhbCBjYWxjdWxhdGlvbiBvZiBPTFMgY29lZmZpY2llbnRzXG5iMWhhdCA8LSBjb3Yocm9lLHNhbGFyeSkvdmFyKHJvZSlcbmIwaGF0IDwtIG1lYW4oc2FsYXJ5KSAtIGIxaGF0Km1lYW4ocm9lKSBcbmNhdChwYXN0ZSgnYjBfaGF0OiAnLCBiMGhhdCwgJ1xcbmIxX2hhdDogJywgYjFoYXQpKVxuYGBgIn0= -->
+<pre class="r"><code>data(ceosal1, package=&#39;wooldridge&#39;)
 attach(ceosal1)
 
 # manual calculation of OLS coefficients
 b1hat &lt;- cov(roe,salary)/var(roe)
 b0hat &lt;- mean(salary) - b1hat*mean(roe) 
 cat(paste(&#39;b0_hat: &#39;, b0hat, &#39;\nb1_hat: &#39;, b1hat))</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-output-begin eyJkYXRhIjoiYjBfaGF0OiAgOTYzLjE5MTMzNjQ3MjU1OCBcbmIxX2hhdDogIDE4LjUwMTE4NjM0NTIxNDlcbiJ9 --&gt;
-</code></pre>
-<p>b0_hat: 963.191336472558 b1_hat: 18.5011863452149</p>
-<pre><code>
-
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBcXGRldGFjaFxcIHRoZSBkYXRhIGZyYW1lXG5kZXRhY2goY2Vvc2FsMSlcbmBgYFxuYGBgIn0= --&gt;
-
-```r
-```r
-# \detach\ the data frame
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYjBfaGF0OiAgOTYzLjE5MTMzNjQ3MjU1OCBcbmIxX2hhdDogIDE4LjUwMTE4NjM0NTIxNDlcbiJ9 -->
+<pre><code>b0_hat:  963.191336472558 
+b1_hat:  18.5011863452149</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBcImRldGFjaFwiIHRoZSBkYXRhIGZyYW1lXG5kZXRhY2goY2Vvc2FsMSlcbmBgYCJ9 -->
+<pre class="r"><code># &quot;detach&quot; the data frame
 detach(ceosal1)</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-Finally, the parameter estimates are calculated. So the OLS regression
-line is $$
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Finally, the parameter estimates are calculated. So the OLS
+regression line is <span class="math display">\[
 \hat{salary} = 963.1 + 18.5 roe
-$$ The regression results in a variable CEOregres and then use it as an
-argument to abline to add the regression line to the scatter plot
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbiMgT0xTIHJlZ3Jlc3Npb25cbkNFT3JlZ3JlcyA8LSBsbSggc2FsYXJ5IH4gcm9lLCBkYXRhPWNlb3NhbDEgKVxuIyBTY2F0dGVyIHBsb3QgKHJlc3RyaWN0IHkgYXhpcyBsaW1pdHMpXG53aXRoKGNlb3NhbDEsIHBsb3Qocm9lLCBzYWxhcnksIHlsaW09YygwLDQwMDApKSlcbiMgQWRkIE9MUyByZWdyZXNzaW9uIGxpbmVcbmFibGluZShDRU9yZWdyZXMpXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-data(ceosal1, package=&#39;wooldridge&#39;)
+\]</span> The regression results in a variable CEOregres and then use it
+as an argument to abline to add the regression line to the scatter
+plot</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbiMgT0xTIHJlZ3Jlc3Npb25cbkNFT3JlZ3JlcyA8LSBsbSggc2FsYXJ5IH4gcm9lLCBkYXRhPWNlb3NhbDEgKVxuIyBTY2F0dGVyIHBsb3QgKHJlc3RyaWN0IHkgYXhpcyBsaW1pdHMpXG53aXRoKGNlb3NhbDEsIHBsb3Qocm9lLCBzYWxhcnksIHlsaW09YygwLDQwMDApKSlcbiMgQWRkIE9MUyByZWdyZXNzaW9uIGxpbmVcbmFibGluZShDRU9yZWdyZXMpXG5gYGAifQ== -->
+<pre class="r"><code>data(ceosal1, package=&#39;wooldridge&#39;)
 # OLS regression
 CEOregres &lt;- lm( salary ~ roe, data=ceosal1 )
 # Scatter plot (restrict y axis limits)
 with(ceosal1, plot(roe, salary, ylim=c(0,4000)))
 # Add OLS regression line
 abline(CEOregres)</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-plot-begin --&gt;
-
-&lt;img src=&quot;data:image/png;base64,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&quot; /&gt;
-
-&lt;!-- rnb-plot-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-### Wooldridge, Example 2.4: Wage and Education
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZGF0YSh3YWdlMSxwYWNrYWdlPSd3b29sZHJpZGdlJylcbiNPTFNyZWdyZXNzaW9uOlxubG0od2FnZX5lZHVjLGRhdGE9d2FnZTEpXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-data(wage1,package=&#39;wooldridge&#39;)
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="wooldridge-example-2.4-wage-and-education" class="section level3">
+<h3>Wooldridge, Example 2.4: Wage and Education</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YSh3YWdlMSxwYWNrYWdlPSd3b29sZHJpZGdlJylcbiNPTFNyZWdyZXNzaW9uOlxubG0od2FnZX5lZHVjLGRhdGE9d2FnZTEpXG5gYGAifQ== -->
+<pre class="r"><code>data(wage1,package=&#39;wooldridge&#39;)
 #OLSregression:
 lm(wage~educ,data=wage1)</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IHdhZ2UgfiBlZHVjLCBkYXRhID0gd2FnZTEpXG5cbkNvZWZmaWNpZW50czpcbihJbnRlcmNlcHQpICAgICAgICAgZWR1YyAgXG4gICAgLTAuOTA0OSAgICAgICAwLjU0MTQgIFxuIn0= --&gt;
-</code></pre>
-<p>Call: lm(formula = wage ~ educ, data = wage1)</p>
-<p>Coefficients: (Intercept) educ<br />
--0.9049 0.5414</p>
-<pre><code>
-
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-### Wooldridge, Example 2.5: Voting Outcomes and Campaign Expenditures
-
-$$
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="wooldridge-example-2.5-voting-outcomes-and-campaign-expenditures" class="section level3">
+<h3>Wooldridge, Example 2.5: Voting Outcomes and Campaign
+Expenditures</h3>
+<p><span class="math display">\[
 voteA = \beta_0 +\beta_1 shareA + u
-$$
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZGF0YSh2b3RlMSwgcGFja2FnZT0nd29vbGRyaWRnZScpXG52b3RlX3JlZyA9IGxtKHZvdGVBIH4gc2hhcmVBLCBkYXRhID0gdm90ZTEpXG53aXRoKHZvdGUxLCBwbG90KHNoYXJlQSwgdm90ZUEpKVxuYWJsaW5lKHZvdGVfcmVnKVxuYGBgXG5gYGAifQ== --&gt;
-
-```r
-```r
-data(vote1, package=&#39;wooldridge&#39;)
+\]</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YSh2b3RlMSwgcGFja2FnZT0nd29vbGRyaWRnZScpXG52b3RlX3JlZyA9IGxtKHZvdGVBIH4gc2hhcmVBLCBkYXRhID0gdm90ZTEpXG53aXRoKHZvdGUxLCBwbG90KHNoYXJlQSwgdm90ZUEpKVxuYWJsaW5lKHZvdGVfcmVnKVxuYGBgIn0= -->
+<pre class="r"><code>data(vote1, package=&#39;wooldridge&#39;)
 vote_reg = lm(voteA ~ shareA, data = vote1)
 with(vote1, plot(shareA, voteA))
 abline(vote_reg)</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 2.2 Coefficients, Fitted Values and Residuals
-
-##### Coefficients
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudm90ZV9yZWckY29lZmZpY2llbnRzXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-vote_reg$coefficients</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-##### Fitted Value $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_1$
-
-##### Residual $\hat{u_i} = y_i - \hat{y_i}$
-
-### Example 2.6: CEO Salary and Return on Equity
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbiMgZXh0cmFjdCB2YXJpYWJsZXMgYXMgdmVjdG9yczpcbnNhbCA8LSBjZW9zYWwxJHNhbGFyeVxucm9lIDwtIGNlb3NhbDEkcm9lXG4jIHJlZ3Jlc3Npb24gd2l0aCB2ZWN0b3JzOlxuQ0VPcmVncmVzIDwtIGxtKCBzYWwgfiByb2UgKVxuIyBvYnRhaW4gcHJlZGljdGVkIHZhbHVlcyBhbmQgcmVzaWR1YWxzXG5zYWwuaGF0IDwtIGZpdHRlZChDRU9yZWdyZXMpXG51LmhhdCA8LSByZXNpZChDRU9yZWdyZXMpXG4jIFdvb2xkcmlkZ2UsIFRhYmxlIDIuMjpcbmNiaW5kKHJvZSwgc2FsLCBzYWwuaGF0LCB1LmhhdClbMToxNSxdXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-data(ceosal1, package=&#39;wooldridge&#39;)
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="coefficients-fitted-values-and-residuals" class="section level2">
+<h2>2.2 Coefficients, Fitted Values and Residuals</h2>
+<div id="coefficients" class="section level5">
+<h5>Coefficients</h5>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudm90ZV9yZWckY29lZmZpY2llbnRzXG5gYGAifQ== -->
+<pre class="r"><code>vote_reg$coefficients</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="fitted-value-haty_i-hatbeta_0-hatbeta_1x_1" class="section level5">
+<h5>Fitted Value <span class="math inline">\(\hat{y_i} = \hat{\beta_0} +
+\hat{\beta_1}x_1\)</span></h5>
+</div>
+<div id="residual-hatu_i-y_i---haty_i" class="section level5">
+<h5>Residual <span class="math inline">\(\hat{u_i} = y_i -
+\hat{y_i}\)</span></h5>
+</div>
+<div id="example-2.6-ceo-salary-and-return-on-equity" class="section level3">
+<h3>Example 2.6: CEO Salary and Return on Equity</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbiMgZXh0cmFjdCB2YXJpYWJsZXMgYXMgdmVjdG9yczpcbnNhbCA8LSBjZW9zYWwxJHNhbGFyeVxucm9lIDwtIGNlb3NhbDEkcm9lXG4jIHJlZ3Jlc3Npb24gd2l0aCB2ZWN0b3JzOlxuQ0VPcmVncmVzIDwtIGxtKCBzYWwgfiByb2UgKVxuIyBvYnRhaW4gcHJlZGljdGVkIHZhbHVlcyBhbmQgcmVzaWR1YWxzXG5zYWwuaGF0IDwtIGZpdHRlZChDRU9yZWdyZXMpXG51LmhhdCA8LSByZXNpZChDRU9yZWdyZXMpXG4jIFdvb2xkcmlkZ2UsIFRhYmxlIDIuMjpcbmNiaW5kKHJvZSwgc2FsLCBzYWwuaGF0LCB1LmhhdClbMToxNSxdXG5gYGAifQ== -->
+<pre class="r"><code>data(ceosal1, package=&#39;wooldridge&#39;)
 # extract variables as vectors:
 sal &lt;- ceosal1$salary
 roe &lt;- ceosal1$roe
@@ -1986,7 +1885,6 @@ sal.hat &lt;- fitted(CEOregres)
 u.hat &lt;- resid(CEOregres)
 # Wooldridge, Table 2.2:
 cbind(roe, sal, sal.hat, u.hat)[1:15,]</code></pre>
-<p>```</p>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1999,12 +1897,156 @@ cbind(roe, sal, sal.hat, u.hat)[1:15,]</code></pre>
 \sum_{i=1}^{n} {x_i \hat{u_i}} =0 \rightarrow Cov(x_i,\hat{u_i}) = 0
 \]</span> <span class="math display">\[
 \bar{y} = \hat{\beta_0} + \hat{\beta_1} \cdot \bar{x}
-\]</span> asdasd</p>
+\]</span> ### Wooldridge, Example 2.7: Wage and Education</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YSh3YWdlMSwgcGFja2FnZT0nd29vbGRyaWRnZScpXG5XQUdFcmVncmVzIDwtIGxtKHdhZ2UgfiBlZHVjLCBkYXRhPXdhZ2UxKVxuIyBvYnRhaW4gY29lZmZpY2llbnRzLCBwcmVkaWN0ZWQgdmFsdWVzIGFuZCByZXNpZHVhbHNcbmIuaGF0IDwtIGNvZWYoV0FHRXJlZ3JlcylcbndhZ2UuaGF0IDwtIGZpdHRlZChXQUdFcmVncmVzKVxudS5oYXQgPC0gcmVzaWQoV0FHRXJlZ3JlcylcbiMgQ29uZmlybSBwcm9wZXJ0eSAoMSk6XG5tZWFuKHUuaGF0KVxuIyBDb25maXJtIHByb3BlcnR5ICgyKTpcbmNvcih3YWdlMSRlZHVjICwgdS5oYXQpXG4jIENvbmZpcm0gcHJvcGVydHkgKDMpOlxubWVhbih3YWdlMSR3YWdlKVxuYi5oYXRbMV0gKyBiLmhhdFsyXSAqIG1lYW4od2FnZTEkZWR1YylcbmBgYCJ9 -->
+<pre class="r"><code>data(wage1, package=&#39;wooldridge&#39;)
+WAGEregres &lt;- lm(wage ~ educ, data=wage1)
+# obtain coefficients, predicted values and residuals
+b.hat &lt;- coef(WAGEregres)
+wage.hat &lt;- fitted(WAGEregres)
+u.hat &lt;- resid(WAGEregres)
+# Confirm property (1):
+mean(u.hat)
+# Confirm property (2):
+cor(wage1$educ , u.hat)
+# Confirm property (3):
+mean(wage1$wage)
+b.hat[1] + b.hat[2] * mean(wage1$educ)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="goodness-of-fit" class="section level2">
+<h2>2.3 Goodness of fit</h2>
+<p>The total sum of squares (SST), explained sum of squares (SSE) and
+residual sum of squares (SSR) can be written as</p>
+<p><span class="math display">\[
+SST = \sum_{i=1}^{n}{(y_i - \bar{y})^2} = (n-1) \cdot Var(y)
+\]</span></p>
+<p><span class="math display">\[
+SSE = \sum_{i=1}^{n}{(\hat{y_i} - \bar{y})^2} = (n-1) \cdot Var(\hat{y})
+\]</span> <span class="math display">\[
+SSE = \sum_{i=1}^{n}{\hat{u_i}^2} = (n-1) \cdot Var(\hat{u})
+\]</span> Because (n − 1) cancels out, it can be equivalently written as
+<span class="math display">\[
+R^2 = \frac{Var(\hat{y})}{Var(y)} = 1 -\frac{Var(\hat{u})}{Var(y)}
+\]</span></p>
+<div id="example-2.8-ceo-salary-and-return-on-equity" class="section level3">
+<h3>Example 2.8: CEO Salary and Return on Equity</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbkNFT3JlZ3JlcyA8LSBsbSggc2FsYXJ5IH4gcm9lLCBkYXRhPWNlb3NhbDEgKVxuIyBDYWxjdWxhdGUgcHJlZGljdGVkIHZhbHVlcyAmIHJlc2lkdWFsczpcbnNhbC5oYXQgPC0gZml0dGVkKENFT3JlZ3JlcylcbnUuaGF0IDwtIHJlc2lkKENFT3JlZ3JlcylcbiMgQ2FsY3VsYXRlIFJeMiBpbiB0aHJlZSBkaWZmZXJlbnQgd2F5czpcbnNhbCA8LSBjZW9zYWwxJHNhbGFyeVxudmFyKHNhbC5oYXQpIC8gdmFyKHNhbClcblxuMSAtIHZhcih1LmhhdCkgLyB2YXIoc2FsKVxuXG5jb3Ioc2FsLCBzYWwuaGF0KV4yXG5gYGAifQ== -->
+<pre class="r"><code>data(ceosal1, package=&#39;wooldridge&#39;)
+CEOregres &lt;- lm( salary ~ roe, data=ceosal1 )
+# Calculate predicted values &amp; residuals:
+sal.hat &lt;- fitted(CEOregres)
+u.hat &lt;- resid(CEOregres)
+# Calculate R^2 in three different ways:
+sal &lt;- ceosal1$salary
+var(sal.hat) / var(sal)
+
+1 - var(u.hat) / var(sal)
+
+cor(sal, sal.hat)^2</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="example-2.9-voting-outcomes-and-campaign-expenditures" class="section level3">
+<h3>Example 2.9: Voting Outcomes and Campaign Expenditures</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YSh2b3RlMSwgcGFja2FnZT0nd29vbGRyaWRnZScpXG5WT1RFcmVzIDwtIGxtKHZvdGVBIH4gc2hhcmVBLCBkYXRhPXZvdGUxKVxuIyBTdW1tYXJ5IG9mIHRoZSByZWdyZXNzaW9uIHJlc3VsdHNcbnN1bW1hcnkoVk9URXJlcylcbmBgYCJ9 -->
+<pre class="r"><code>data(vote1, package=&#39;wooldridge&#39;)
+VOTEres &lt;- lm(voteA ~ shareA, data=vote1)
+# Summary of the regression results
+summary(VOTEres)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="nonlinearities" class="section level2">
+<h2>2.4. Nonlinearities</h2>
+<div id="wooldridge-example-2.10-wage-and-education" class="section level3">
+<h3>Wooldridge, Example 2.10: Wage and Education</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YSh3YWdlMSwgcGFja2FnZT0nd29vbGRyaWRnZScpXG4jIEVzdGltYXRlIGxvZy1sZXZlbCBtb2RlbFxubG0oIGxvZyh3YWdlKSB+IGVkdWMsIGRhdGE9d2FnZTEgKVxuYGBgIn0= -->
+<pre class="r"><code>data(wage1, package=&#39;wooldridge&#39;)
+# Estimate log-level model
+lm( log(wage) ~ educ, data=wage1 )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="example-2.11-ceo-salary-and-firm-sale" class="section level3">
+<h3>Example 2.11: CEO Salary and Firm Sale</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbiMgRXN0aW1hdGUgbG9nLWxvZyBtb2RlbFxubG0oIGxvZyhzYWxhcnkpIH4gbG9nKHNhbGVzKSwgZGF0YT1jZW9zYWwxIClcbmBgYCJ9 -->
+<pre class="r"><code>data(ceosal1, package=&#39;wooldridge&#39;)
+# Estimate log-log model
+lm( log(salary) ~ log(sales), data=ceosal1 )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="regression-through-the-origin-and-regression-on-a-constant" class="section level2">
+<h2>2.5. Regression through the Origin and Regression on a Constant</h2>
+<div id="through-the-origin" class="section level6">
+<h6>Through the Origin</h6>
+<p>lm(y ~ 0 + x)</p>
+</div>
+<div id="through-a-constant" class="section level6">
+<h6>Through a Constant</h6>
+<p>lm(y ~ 1)</p>
+</div>
+<div id="example-code" class="section level5">
+<h5>Example Code</h5>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJylcbiMgVXN1YWwgT0xTIHJlZ3Jlc3Npb246XG4ocmVnMSA8LSBsbSggc2FsYXJ5IH4gcm9lLCBkYXRhPWNlb3NhbDEpKVxuIyBSZWdyZXNzaW9uIHdpdGhvdXQgaW50ZXJjZXB0ICh0aHJvdWdoIG9yaWdpbik6XG4ocmVnMiA8LSBsbSggc2FsYXJ5IH4gMCArIHJvZSwgZGF0YT1jZW9zYWwxKSlcbiMgUmVncmVzc2lvbiB3aXRob3V0IHNsb3BlIChvbiBhIGNvbnN0YW50KTpcbihyZWczIDwtIGxtKCBzYWxhcnkgfiAxICwgZGF0YT1jZW9zYWwxKSlcbiMgYXZlcmFnZSB5OlxubWVhbihjZW9zYWwxJHNhbGFyeSlcbiMgU2NhdHRlciBQbG90IHdpdGggYWxsIDMgcmVncmVzc2lvbiBsaW5lc1xucGxvdChjZW9zYWwxJHJvZSwgY2Vvc2FsMSRzYWxhcnksIHlsaW09YygwLDQwMDApKVxuYWJsaW5lKHJlZzEsIGx3ZD0yLCBsdHk9MSlcbmFibGluZShyZWcyLCBsd2Q9MiwgbHR5PTIpXG5hYmxpbmUocmVnMywgbHdkPTIsIGx0eT0zKVxubGVnZW5kKFwidG9wbGVmdFwiLGMoXCJmdWxsXCIsXCJ0aHJvdWdoIG9yaWdpblwiLFwiY29uc3Qgb25seVwiKSxsd2Q9MixsdHk9MTozKVxuXG5gYGAifQ== -->
+<pre class="r"><code>data(ceosal1, package=&#39;wooldridge&#39;)
+# Usual OLS regression:
+(reg1 &lt;- lm( salary ~ roe, data=ceosal1))
+# Regression without intercept (through origin):
+(reg2 &lt;- lm( salary ~ 0 + roe, data=ceosal1))
+# Regression without slope (on a constant):
+(reg3 &lt;- lm( salary ~ 1 , data=ceosal1))
+# average y:
+mean(ceosal1$salary)
+# Scatter Plot with all 3 regression lines
+plot(ceosal1$roe, ceosal1$salary, ylim=c(0,4000))
+abline(reg1, lwd=2, lty=1)
+abline(reg2, lwd=2, lty=2)
+abline(reg3, lwd=2, lty=3)
+legend(&quot;topleft&quot;,c(&quot;full&quot;,&quot;through origin&quot;,&quot;const only&quot;),lwd=2,lty=1:3)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="expected-values-variances-and-standard-errors" class="section level2">
+<h2>2.6. Expected Values, Variances, and Standard Errors</h2>
+<ul>
+<li>SLR.1: Linear population regression function: <span class="math inline">\(y = β_0 + β_1x + u\)</span></li>
+<li>SLR.2: Random sampling of x and y from the population</li>
+<li>SLR.3: Variation in the sample values <span class="math inline">\(x1, ..., x_n\)</span></li>
+<li>SLR.4: Zero conditional mean: <span class="math inline">\(E(u|x) =
+0\)</span></li>
+<li>SLR.5: Homoscedasticity: <span class="math inline">\(Var(u|x) =
+σ\)</span></li>
+</ul>
 <!-- rnb-text-end -->
 </div>
-</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNoYXB0ZXIgMi4gVGhlIFNpbXBsZSBSZWdyZXNzaW9uIE1vZGVsTW9kZWwiDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQNCiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0DQplZGl0b3Jfb3B0aW9uczoNCiAgbWFya2Rvd246DQogICAgd3JhcDogNzINCi0tLQ0KDQojIyAyLjEgU2ltcGxlIGxpbmVhciByZWdyZXNzaW9uDQoNCldlIGFyZSBjb25jZXJuZWQgd2l0aCBlc3RpbWF0aW5nIHRoZSBwb3B1bGF0aW9uIHBhcmFtZXRlcnMgJM6yXzAkIGFuZA0KJM6yXzEkIG9mIHRoZSBzaW1wbGUgbGluZWFyIHJlZ3Jlc3Npb24gbW9kZWwgJCQNCnkgPSBcYmV0YV8wICsgXGJldGFfMSArIFxtdQ0KJCQgZnJvbSBhIHJhbmRvbSBzYW1wbGUgb2YgJHkkIGFuZCAkeCQuIEFjY29yZGluZyB0byBXb29sZHJpZGdlICgyMDE5LA0KU2VjdGlvbiAyLjIpLCB0aGUgb3JkaW5hcnkgbGVhc3Qgc3F1YXJlcyAoT0xTKSBlc3RpbWF0b3JzIGFyZSAkJA0KXGhhdHtcYmV0YX1fMCA9IFxiYXJ7eX0gKyBcaGF0e1xiZXRhfV8xeA0KJCQgJCQNClxoYXR7XGJldGF9XzEgPSBcZnJhY3tDb3YoeCwgeSl9e1Zhcih4KX0NCiQkIEJhc2VkIG9uIHRoZXNlIGVzdGltYXRlZCBwYXJhbWV0ZXJzLCB0aGUgT0xTIHJlZ3Jlc3Npb24gbGluZSBpcyAkJA0KeSA9IFxoYXR7XGJldGF9XzAgKyBcaGF0e1xiZXRhfV8xDQokJA0KDQojIyMgV29vbGRyaWRnZSwgRXhhbXBsZSAyLjM6IENFTyBTYWxhcnkgYW5kIFJldHVybiBvbiBFcXVpdHkNCg0KYGBge3J9DQpsaWJyYXJ5KHdvb2xkcmlkZ2UpDQpgYGANCg0KYGBge3IgbWVzc2FnZT1GQUxTRX0NCmRhdGEoY2Vvc2FsMSwgcGFja2FnZT0nd29vbGRyaWRnZScpDQphdHRhY2goY2Vvc2FsMSkNCg0KIyBtYW51YWwgY2FsY3VsYXRpb24gb2YgT0xTIGNvZWZmaWNpZW50cw0KYjFoYXQgPC0gY292KHJvZSxzYWxhcnkpL3Zhcihyb2UpDQpiMGhhdCA8LSBtZWFuKHNhbGFyeSkgLSBiMWhhdCptZWFuKHJvZSkgDQpjYXQocGFzdGUoJ2IwX2hhdDogJywgYjBoYXQsICdcbmIxX2hhdDogJywgYjFoYXQpKQ0KDQojICJkZXRhY2giIHRoZSBkYXRhIGZyYW1lDQpkZXRhY2goY2Vvc2FsMSkNCmBgYA0KDQpGaW5hbGx5LCB0aGUgcGFyYW1ldGVyIGVzdGltYXRlcyBhcmUgY2FsY3VsYXRlZC4gU28gdGhlIE9MUyByZWdyZXNzaW9uDQpsaW5lIGlzICQkDQpcaGF0e3NhbGFyeX0gPSA5NjMuMSArIDE4LjUgcm9lDQokJCBUaGUgcmVncmVzc2lvbiByZXN1bHRzIGluIGEgdmFyaWFibGUgQ0VPcmVncmVzIGFuZCB0aGVuIHVzZSBpdCBhcyBhbg0KYXJndW1lbnQgdG8gYWJsaW5lIHRvIGFkZCB0aGUgcmVncmVzc2lvbiBsaW5lIHRvIHRoZSBzY2F0dGVyIHBsb3QNCg0KYGBge3J9DQpkYXRhKGNlb3NhbDEsIHBhY2thZ2U9J3dvb2xkcmlkZ2UnKQ0KIyBPTFMgcmVncmVzc2lvbg0KQ0VPcmVncmVzIDwtIGxtKCBzYWxhcnkgfiByb2UsIGRhdGE9Y2Vvc2FsMSApDQojIFNjYXR0ZXIgcGxvdCAocmVzdHJpY3QgeSBheGlzIGxpbWl0cykNCndpdGgoY2Vvc2FsMSwgcGxvdChyb2UsIHNhbGFyeSwgeWxpbT1jKDAsNDAwMCkpKQ0KIyBBZGQgT0xTIHJlZ3Jlc3Npb24gbGluZQ0KYWJsaW5lKENFT3JlZ3JlcykNCmBgYA0KDQojIyMgV29vbGRyaWRnZSwgRXhhbXBsZSAyLjQ6IFdhZ2UgYW5kIEVkdWNhdGlvbg0KDQpgYGB7cn0NCmRhdGEod2FnZTEscGFja2FnZT0nd29vbGRyaWRnZScpDQojT0xTcmVncmVzc2lvbjoNCmxtKHdhZ2V+ZWR1YyxkYXRhPXdhZ2UxKQ0KYGBgDQoNCiMjIyBXb29sZHJpZGdlLCBFeGFtcGxlIDIuNTogVm90aW5nIE91dGNvbWVzIGFuZCBDYW1wYWlnbiBFeHBlbmRpdHVyZXMNCg0KJCQNCnZvdGVBID0gXGJldGFfMCArXGJldGFfMSBzaGFyZUEgKyB1DQokJA0KDQpgYGB7cn0NCmRhdGEodm90ZTEsIHBhY2thZ2U9J3dvb2xkcmlkZ2UnKQ0Kdm90ZV9yZWcgPSBsbSh2b3RlQSB+IHNoYXJlQSwgZGF0YSA9IHZvdGUxKQ0Kd2l0aCh2b3RlMSwgcGxvdChzaGFyZUEsIHZvdGVBKSkNCmFibGluZSh2b3RlX3JlZykNCmBgYA0KDQojIyAyLjIgQ29lZmZpY2llbnRzLCBGaXR0ZWQgVmFsdWVzIGFuZCBSZXNpZHVhbHMNCg0KIyMjIyMgQ29lZmZpY2llbnRzDQoNCmBgYHtyfQ0Kdm90ZV9yZWckY29lZmZpY2llbnRzDQpgYGANCg0KIyMjIyMgRml0dGVkIFZhbHVlICRcaGF0e3lfaX0gPSBcaGF0e1xiZXRhXzB9ICsgXGhhdHtcYmV0YV8xfXhfMSQNCg0KIyMjIyMgUmVzaWR1YWwgJFxoYXR7dV9pfSA9IHlfaSAtIFxoYXR7eV9pfSQNCg0KIyMjIEV4YW1wbGUgMi42OiBDRU8gU2FsYXJ5IGFuZCBSZXR1cm4gb24gRXF1aXR5DQoNCmBgYHtyfQ0KZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJykNCiMgZXh0cmFjdCB2YXJpYWJsZXMgYXMgdmVjdG9yczoNCnNhbCA8LSBjZW9zYWwxJHNhbGFyeQ0Kcm9lIDwtIGNlb3NhbDEkcm9lDQojIHJlZ3Jlc3Npb24gd2l0aCB2ZWN0b3JzOg0KQ0VPcmVncmVzIDwtIGxtKCBzYWwgfiByb2UgKQ0KIyBvYnRhaW4gcHJlZGljdGVkIHZhbHVlcyBhbmQgcmVzaWR1YWxzDQpzYWwuaGF0IDwtIGZpdHRlZChDRU9yZWdyZXMpDQp1LmhhdCA8LSByZXNpZChDRU9yZWdyZXMpDQojIFdvb2xkcmlkZ2UsIFRhYmxlIDIuMjoNCmNiaW5kKHJvZSwgc2FsLCBzYWwuaGF0LCB1LmhhdClbMToxNSxdDQpgYGANCg0KIyMjIFRocmVlIHByb3BlcnRpZXMgb2YgT0xTIHN0YXRpc3RpYw0KDQokJA0KXHN1bV97aT0xfV57bn0ge3VfaX0gPSAwIFxyaWdodGFycm93IFxiYXJ7XGhhdHt1X2l9fSA9IDANCiQkICQkDQpcc3VtX3tpPTF9XntufSB7eF9pIFxoYXR7dV9pfX0gPTAgXHJpZ2h0YXJyb3cgQ292KHhfaSxcaGF0e3VfaX0pID0gMA0KJCQgJCQNClxiYXJ7eX0gPSBcaGF0e1xiZXRhXzB9ICsgXGhhdHtcYmV0YV8xfSBcY2RvdCBcYmFye3h9DQokJA0KYXNkYXNk</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNoYXB0ZXIgMi4gVGhlIFNpbXBsZSBSZWdyZXNzaW9uIE1vZGVsTW9kZWwiDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQNCiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0DQogIA0KZWRpdG9yX29wdGlvbnM6DQogIG1hcmtkb3duOg0KICAgIHdyYXA6IDcyDQotLS0NCg0KIyMgMi4xIFNpbXBsZSBsaW5lYXIgcmVncmVzc2lvbg0KDQpXZSBhcmUgY29uY2VybmVkIHdpdGggZXN0aW1hdGluZyB0aGUgcG9wdWxhdGlvbiBwYXJhbWV0ZXJzICTOsl8wJCBhbmQNCiTOsl8xJCBvZiB0aGUgc2ltcGxlIGxpbmVhciByZWdyZXNzaW9uIG1vZGVsICQkDQp5ID0gXGJldGFfMCArIFxiZXRhXzEgKyBcbXUNCiQkIGZyb20gYSByYW5kb20gc2FtcGxlIG9mICR5JCBhbmQgJHgkLiBBY2NvcmRpbmcgdG8gV29vbGRyaWRnZSAoMjAxOSwNClNlY3Rpb24gMi4yKSwgdGhlIG9yZGluYXJ5IGxlYXN0IHNxdWFyZXMgKE9MUykgZXN0aW1hdG9ycyBhcmUgJCQNClxoYXR7XGJldGF9XzAgPSBcYmFye3l9ICsgXGhhdHtcYmV0YX1fMXgNCiQkICQkDQpcaGF0e1xiZXRhfV8xID0gXGZyYWN7Q292KHgsIHkpfXtWYXIoeCl9DQokJCBCYXNlZCBvbiB0aGVzZSBlc3RpbWF0ZWQgcGFyYW1ldGVycywgdGhlIE9MUyByZWdyZXNzaW9uIGxpbmUgaXMgJCQNCnkgPSBcaGF0e1xiZXRhfV8wICsgXGhhdHtcYmV0YX1fMQ0KJCQNCg0KIyMjIFdvb2xkcmlkZ2UsIEV4YW1wbGUgMi4zOiBDRU8gU2FsYXJ5IGFuZCBSZXR1cm4gb24gRXF1aXR5DQoNCmBgYHtyfQ0KbGlicmFyeSh3b29sZHJpZGdlKQ0KYGBgDQoNCmBgYHtyIG1lc3NhZ2U9RkFMU0V9DQpkYXRhKGNlb3NhbDEsIHBhY2thZ2U9J3dvb2xkcmlkZ2UnKQ0KYXR0YWNoKGNlb3NhbDEpDQoNCiMgbWFudWFsIGNhbGN1bGF0aW9uIG9mIE9MUyBjb2VmZmljaWVudHMNCmIxaGF0IDwtIGNvdihyb2Usc2FsYXJ5KS92YXIocm9lKQ0KYjBoYXQgPC0gbWVhbihzYWxhcnkpIC0gYjFoYXQqbWVhbihyb2UpIA0KY2F0KHBhc3RlKCdiMF9oYXQ6ICcsIGIwaGF0LCAnXG5iMV9oYXQ6ICcsIGIxaGF0KSkNCg0KIyAiZGV0YWNoIiB0aGUgZGF0YSBmcmFtZQ0KZGV0YWNoKGNlb3NhbDEpDQpgYGANCg0KRmluYWxseSwgdGhlIHBhcmFtZXRlciBlc3RpbWF0ZXMgYXJlIGNhbGN1bGF0ZWQuIFNvIHRoZSBPTFMgcmVncmVzc2lvbg0KbGluZSBpcyAkJA0KXGhhdHtzYWxhcnl9ID0gOTYzLjEgKyAxOC41IHJvZQ0KJCQgVGhlIHJlZ3Jlc3Npb24gcmVzdWx0cyBpbiBhIHZhcmlhYmxlIENFT3JlZ3JlcyBhbmQgdGhlbiB1c2UgaXQgYXMgYW4NCmFyZ3VtZW50IHRvIGFibGluZSB0byBhZGQgdGhlIHJlZ3Jlc3Npb24gbGluZSB0byB0aGUgc2NhdHRlciBwbG90DQoNCmBgYHtyfQ0KZGF0YShjZW9zYWwxLCBwYWNrYWdlPSd3b29sZHJpZGdlJykNCiMgT0xTIHJlZ3Jlc3Npb24NCkNFT3JlZ3JlcyA8LSBsbSggc2FsYXJ5IH4gcm9lLCBkYXRhPWNlb3NhbDEgKQ0KIyBTY2F0dGVyIHBsb3QgKHJlc3RyaWN0IHkgYXhpcyBsaW1pdHMpDQp3aXRoKGNlb3NhbDEsIHBsb3Qocm9lLCBzYWxhcnksIHlsaW09YygwLDQwMDApKSkNCiMgQWRkIE9MUyByZWdyZXNzaW9uIGxpbmUNCmFibGluZShDRU9yZWdyZXMpDQpgYGANCg0KIyMjIFdvb2xkcmlkZ2UsIEV4YW1wbGUgMi40OiBXYWdlIGFuZCBFZHVjYXRpb24NCg0KYGBge3J9DQpkYXRhKHdhZ2UxLHBhY2thZ2U9J3dvb2xkcmlkZ2UnKQ0KI09MU3JlZ3Jlc3Npb246DQpsbSh3YWdlfmVkdWMsZGF0YT13YWdlMSkNCmBgYA0KDQojIyMgV29vbGRyaWRnZSwgRXhhbXBsZSAyLjU6IFZvdGluZyBPdXRjb21lcyBhbmQgQ2FtcGFpZ24gRXhwZW5kaXR1cmVzDQoNCiQkDQp2b3RlQSA9IFxiZXRhXzAgK1xiZXRhXzEgc2hhcmVBICsgdQ0KJCQNCg0KYGBge3J9DQpkYXRhKHZvdGUxLCBwYWNrYWdlPSd3b29sZHJpZGdlJykNCnZvdGVfcmVnID0gbG0odm90ZUEgfiBzaGFyZUEsIGRhdGEgPSB2b3RlMSkNCndpdGgodm90ZTEsIHBsb3Qoc2hhcmVBLCB2b3RlQSkpDQphYmxpbmUodm90ZV9yZWcpDQpgYGANCg0KIyMgMi4yIENvZWZmaWNpZW50cywgRml0dGVkIFZhbHVlcyBhbmQgUmVzaWR1YWxzDQoNCiMjIyMjIENvZWZmaWNpZW50cw0KDQpgYGB7cn0NCnZvdGVfcmVnJGNvZWZmaWNpZW50cw0KYGBgDQoNCiMjIyMjIEZpdHRlZCBWYWx1ZSAkXGhhdHt5X2l9ID0gXGhhdHtcYmV0YV8wfSArIFxoYXR7XGJldGFfMX14XzEkDQoNCiMjIyMjIFJlc2lkdWFsICRcaGF0e3VfaX0gPSB5X2kgLSBcaGF0e3lfaX0kDQoNCiMjIyBFeGFtcGxlIDIuNjogQ0VPIFNhbGFyeSBhbmQgUmV0dXJuIG9uIEVxdWl0eQ0KDQpgYGB7cn0NCmRhdGEoY2Vvc2FsMSwgcGFja2FnZT0nd29vbGRyaWRnZScpDQojIGV4dHJhY3QgdmFyaWFibGVzIGFzIHZlY3RvcnM6DQpzYWwgPC0gY2Vvc2FsMSRzYWxhcnkNCnJvZSA8LSBjZW9zYWwxJHJvZQ0KIyByZWdyZXNzaW9uIHdpdGggdmVjdG9yczoNCkNFT3JlZ3JlcyA8LSBsbSggc2FsIH4gcm9lICkNCiMgb2J0YWluIHByZWRpY3RlZCB2YWx1ZXMgYW5kIHJlc2lkdWFscw0Kc2FsLmhhdCA8LSBmaXR0ZWQoQ0VPcmVncmVzKQ0KdS5oYXQgPC0gcmVzaWQoQ0VPcmVncmVzKQ0KIyBXb29sZHJpZGdlLCBUYWJsZSAyLjI6DQpjYmluZChyb2UsIHNhbCwgc2FsLmhhdCwgdS5oYXQpWzE6MTUsXQ0KYGBgDQoNCiMjIyBUaHJlZSBwcm9wZXJ0aWVzIG9mIE9MUyBzdGF0aXN0aWMNCg0KJCQNClxzdW1fe2k9MX1ee259IHt1X2l9ID0gMCBccmlnaHRhcnJvdyBcYmFye1xoYXR7dV9pfX0gPSAwDQokJCAkJA0KXHN1bV97aT0xfV57bn0ge3hfaSBcaGF0e3VfaX19ID0wIFxyaWdodGFycm93IENvdih4X2ksXGhhdHt1X2l9KSA9IDANCiQkICQkDQpcYmFye3l9ID0gXGhhdHtcYmV0YV8wfSArIFxoYXR7XGJldGFfMX0gXGNkb3QgXGJhcnt4fQ0KJCQgXCMjIyBXb29sZHJpZGdlLCBFeGFtcGxlIDIuNzogV2FnZSBhbmQgRWR1Y2F0aW9uDQoNCmBgYHtyfQ0KZGF0YSh3YWdlMSwgcGFja2FnZT0nd29vbGRyaWRnZScpDQpXQUdFcmVncmVzIDwtIGxtKHdhZ2UgfiBlZHVjLCBkYXRhPXdhZ2UxKQ0KIyBvYnRhaW4gY29lZmZpY2llbnRzLCBwcmVkaWN0ZWQgdmFsdWVzIGFuZCByZXNpZHVhbHMNCmIuaGF0IDwtIGNvZWYoV0FHRXJlZ3JlcykNCndhZ2UuaGF0IDwtIGZpdHRlZChXQUdFcmVncmVzKQ0KdS5oYXQgPC0gcmVzaWQoV0FHRXJlZ3JlcykNCiMgQ29uZmlybSBwcm9wZXJ0eSAoMSk6DQptZWFuKHUuaGF0KQ0KIyBDb25maXJtIHByb3BlcnR5ICgyKToNCmNvcih3YWdlMSRlZHVjICwgdS5oYXQpDQojIENvbmZpcm0gcHJvcGVydHkgKDMpOg0KbWVhbih3YWdlMSR3YWdlKQ0KYi5oYXRbMV0gKyBiLmhhdFsyXSAqIG1lYW4od2FnZTEkZWR1YykNCmBgYA0KDQojIyAyLjMgR29vZG5lc3Mgb2YgZml0DQoNClRoZSB0b3RhbCBzdW0gb2Ygc3F1YXJlcyAoU1NUKSwgZXhwbGFpbmVkIHN1bSBvZiBzcXVhcmVzIChTU0UpIGFuZA0KcmVzaWR1YWwgc3VtIG9mIHNxdWFyZXMgKFNTUikgY2FuIGJlIHdyaXR0ZW4gYXMNCg0KJCQNClNTVCA9IFxzdW1fe2k9MX1ee259eyh5X2kgLSBcYmFye3l9KV4yfSA9IChuLTEpIFxjZG90IFZhcih5KQ0KJCQNCg0KJCQNClNTRSA9IFxzdW1fe2k9MX1ee259eyhcaGF0e3lfaX0gLSBcYmFye3l9KV4yfSA9IChuLTEpIFxjZG90IFZhcihcaGF0e3l9KQ0KJCQgJCQNClNTRSA9IFxzdW1fe2k9MX1ee259e1xoYXR7dV9pfV4yfSA9IChuLTEpIFxjZG90IFZhcihcaGF0e3V9KQ0KJCQgQmVjYXVzZSAobiDiiJIgMSkgY2FuY2VscyBvdXQsIGl0IGNhbiBiZSBlcXVpdmFsZW50bHkgd3JpdHRlbiBhcyAkJA0KUl4yID0gXGZyYWN7VmFyKFxoYXR7eX0pfXtWYXIoeSl9ID0gMSAtXGZyYWN7VmFyKFxoYXR7dX0pfXtWYXIoeSl9DQokJA0KDQojIyMgRXhhbXBsZSAyLjg6IENFTyBTYWxhcnkgYW5kIFJldHVybiBvbiBFcXVpdHkNCg0KYGBge3J9DQpkYXRhKGNlb3NhbDEsIHBhY2thZ2U9J3dvb2xkcmlkZ2UnKQ0KQ0VPcmVncmVzIDwtIGxtKCBzYWxhcnkgfiByb2UsIGRhdGE9Y2Vvc2FsMSApDQojIENhbGN1bGF0ZSBwcmVkaWN0ZWQgdmFsdWVzICYgcmVzaWR1YWxzOg0Kc2FsLmhhdCA8LSBmaXR0ZWQoQ0VPcmVncmVzKQ0KdS5oYXQgPC0gcmVzaWQoQ0VPcmVncmVzKQ0KIyBDYWxjdWxhdGUgUl4yIGluIHRocmVlIGRpZmZlcmVudCB3YXlzOg0Kc2FsIDwtIGNlb3NhbDEkc2FsYXJ5DQp2YXIoc2FsLmhhdCkgLyB2YXIoc2FsKQ0KDQoxIC0gdmFyKHUuaGF0KSAvIHZhcihzYWwpDQoNCmNvcihzYWwsIHNhbC5oYXQpXjINCmBgYA0KDQojIyMgRXhhbXBsZSAyLjk6IFZvdGluZyBPdXRjb21lcyBhbmQgQ2FtcGFpZ24gRXhwZW5kaXR1cmVzDQoNCmBgYHtyfQ0KZGF0YSh2b3RlMSwgcGFja2FnZT0nd29vbGRyaWRnZScpDQpWT1RFcmVzIDwtIGxtKHZvdGVBIH4gc2hhcmVBLCBkYXRhPXZvdGUxKQ0KIyBTdW1tYXJ5IG9mIHRoZSByZWdyZXNzaW9uIHJlc3VsdHMNCnN1bW1hcnkoVk9URXJlcykNCmBgYA0KDQojIyAyLjQuIE5vbmxpbmVhcml0aWVzDQoNCiMjIyBXb29sZHJpZGdlLCBFeGFtcGxlIDIuMTA6IFdhZ2UgYW5kIEVkdWNhdGlvbg0KDQpgYGB7cn0NCmRhdGEod2FnZTEsIHBhY2thZ2U9J3dvb2xkcmlkZ2UnKQ0KIyBFc3RpbWF0ZSBsb2ctbGV2ZWwgbW9kZWwNCmxtKCBsb2cod2FnZSkgfiBlZHVjLCBkYXRhPXdhZ2UxICkNCmBgYA0KDQojIyMgRXhhbXBsZSAyLjExOiBDRU8gU2FsYXJ5IGFuZCBGaXJtIFNhbGUNCg0KYGBge3J9DQpkYXRhKGNlb3NhbDEsIHBhY2thZ2U9J3dvb2xkcmlkZ2UnKQ0KIyBFc3RpbWF0ZSBsb2ctbG9nIG1vZGVsDQpsbSggbG9nKHNhbGFyeSkgfiBsb2coc2FsZXMpLCBkYXRhPWNlb3NhbDEgKQ0KYGBgDQoNCiMjIDIuNS4gUmVncmVzc2lvbiB0aHJvdWdoIHRoZSBPcmlnaW4gYW5kIFJlZ3Jlc3Npb24gb24gYSBDb25zdGFudA0KDQojIyMjIyMgVGhyb3VnaCB0aGUgT3JpZ2luDQoNCmxtKHkgXH4gMCArIHgpDQoNCiMjIyMjIyBUaHJvdWdoIGEgQ29uc3RhbnQNCg0KbG0oeSBcfiAxKQ0KDQojIyMjIyBFeGFtcGxlIENvZGUNCg0KYGBge3J9DQpkYXRhKGNlb3NhbDEsIHBhY2thZ2U9J3dvb2xkcmlkZ2UnKQ0KIyBVc3VhbCBPTFMgcmVncmVzc2lvbjoNCihyZWcxIDwtIGxtKCBzYWxhcnkgfiByb2UsIGRhdGE9Y2Vvc2FsMSkpDQojIFJlZ3Jlc3Npb24gd2l0aG91dCBpbnRlcmNlcHQgKHRocm91Z2ggb3JpZ2luKToNCihyZWcyIDwtIGxtKCBzYWxhcnkgfiAwICsgcm9lLCBkYXRhPWNlb3NhbDEpKQ0KIyBSZWdyZXNzaW9uIHdpdGhvdXQgc2xvcGUgKG9uIGEgY29uc3RhbnQpOg0KKHJlZzMgPC0gbG0oIHNhbGFyeSB+IDEgLCBkYXRhPWNlb3NhbDEpKQ0KIyBhdmVyYWdlIHk6DQptZWFuKGNlb3NhbDEkc2FsYXJ5KQ0KIyBTY2F0dGVyIFBsb3Qgd2l0aCBhbGwgMyByZWdyZXNzaW9uIGxpbmVzDQpwbG90KGNlb3NhbDEkcm9lLCBjZW9zYWwxJHNhbGFyeSwgeWxpbT1jKDAsNDAwMCkpDQphYmxpbmUocmVnMSwgbHdkPTIsIGx0eT0xKQ0KYWJsaW5lKHJlZzIsIGx3ZD0yLCBsdHk9MikNCmFibGluZShyZWczLCBsd2Q9MiwgbHR5PTMpDQpsZWdlbmQoInRvcGxlZnQiLGMoImZ1bGwiLCJ0aHJvdWdoIG9yaWdpbiIsImNvbnN0IG9ubHkiKSxsd2Q9MixsdHk9MTozKQ0KDQpgYGANCg0KIyMgMi42LiBFeHBlY3RlZCBWYWx1ZXMsIFZhcmlhbmNlcywgYW5kIFN0YW5kYXJkIEVycm9ycw0KDQotICAgU0xSLjE6IExpbmVhciBwb3B1bGF0aW9uIHJlZ3Jlc3Npb24gZnVuY3Rpb246ICR5ID0gzrJfMCArIM6yXzF4ICsgdSQNCi0gICBTTFIuMjogUmFuZG9tIHNhbXBsaW5nIG9mIHggYW5kIHkgZnJvbSB0aGUgcG9wdWxhdGlvbg0KLSAgIFNMUi4zOiBWYXJpYXRpb24gaW4gdGhlIHNhbXBsZSB2YWx1ZXMgJHgxLCAuLi4sIHhfbiQNCi0gICBTTFIuNDogWmVybyBjb25kaXRpb25hbCBtZWFuOiAkRSh1fHgpID0gMCQNCi0gICBTTFIuNTogSG9tb3NjZWRhc3RpY2l0eTogJFZhcih1fHgpID0gz4MkDQo=</div>
 
 
 
