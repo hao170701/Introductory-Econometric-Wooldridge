@@ -27,6 +27,9 @@ $$
 
 ```{r}
 library(wooldridge)
+library(equatiomatic)
+library(parameters)
+library(gt)
 ```
 
 ```{r message=FALSE}
@@ -77,6 +80,7 @@ data(vote1, package='wooldridge')
 vote_reg = lm(voteA ~ shareA, data = vote1)
 with(vote1, plot(shareA, voteA))
 abline(vote_reg)
+print_html(model_parameters(vote_reg, summary = TRUE))
 ```
 
 ## 2.2 Coefficients, Fitted Values and Residuals
