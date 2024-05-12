@@ -1,0 +1,176 @@
+---
+title: "Chapter 3. The Simple Regression Model"
+output:
+  html_notebook: default
+---
+
+Running a multiple regression in R is as straightforward as running a simple regression using the **lm** command. Section 3.1 shows how it is done. Section 3.2 should not be skipped since it discusses the interpretation of regression results and the prevalent omitted variables problems. Finally, Section 3.3 covers standard errors and multicollinearity for multiple regression.
+
+## 3. 1. Multiple Regression in Practice
+
+Consider the population regression model
+
+$$
+y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \ldots + \beta_kx_k + u 
+$$
+
+We estimate the model parameters by OLS using the command
+
+```{r}
+lm(y ~ x1 + x2 + x3 + ...)
+```
+
+### Example 3.1: Determinants of College GPA
+
+```{r}
+data(gpa1, package = 'wooldridge')
+# Just obtain parameter estimates:
+lm(colGPA ~ hsGPA + ACT, data = gpa1)
+# Store results under "GPAres" and display full table:
+GPAres <- lm(colGPA ~ hsGPA + ACT, data = gpa1)
+summary(GPAres) 
+```
+
+### Example 3.2 Hourly Wage Equation
+
+```{r}
+data(wage1, package = 'wooldridge')
+
+wageres <- lm(log(wage) ~ educ + exper + tenure, data = wage1)
+summary(wageres) 
+```
+
+### Example 3.3 Participation in 401(k) Pension Plan
+
+```{r}
+data(k401k,package='wooldridge')
+#OLSregression:
+summary(lm(prate~mrate+age,data=k401k))
+```
+
+### Example 3.5 Explaining Arrest Records
+
+```{r}
+data(crime1, package ='wooldridge')
+#Model without avgsen:
+summary( lm(narr86 ~ pcnv+ptime86+qemp86, data=crime1) )
+# Model with avgsen:
+summary( lm(narr86 ~ pcnv+avgsen+ptime86+qemp86, data=crime1) )
+```
+
+### Example 3.6 Hourly Wage Equation
+
+```{r}
+data(wage1, package='wooldridge')
+# OLS regression:
+summary( lm(log(wage) ~ educ, data=wage1) )
+```
+
+## 3.2 Ceteris Paribus Interpretation and Omitted Variable Bias
+
+Consider a regression with two explanatory variables:
+
+$$
+\hat{y} = \hat{\beta_0} + \hat{\beta_1}x_1 + \hat{\beta_2}x_2 \tag{3.6}
+$$
+
+The parameter $\hat{\beta_1}$ is the estimated effect of increasing $x_1$ by one unit while keeping $x_2$ fixed. In contrast, consider the simple regression including only $x_1$ as a regressor:
+
+$$
+\tilde{y} = \tilde{\beta_0} + \tilde{\beta_1}x_1 \tag{3.7}
+$$
+
+The parameter $\tilde{\beta_1}$ is the estimated effect of increasing $x_1$ by one unit (and NOT keeping $x_2$ fixed). It can be related to $\tilde{\beta_1}$ using the formula
+
+$$
+\tilde{\beta_1} = \hat{\beta_1} + \hat{\beta_2}\tilde{\delta_1} \tag{3.8}
+$$
+
+where $\tilde{\delta_1}$ is the slope parameter of the linear regression of $x_2$ on $x_1$
+
+$$
+x_2 = \tilde{\delta_0} + \tilde{\delta_1}x_1 \tag{3.9}
+$$
+
+This equation is actually quite intuitive: As $x_1$ increases by one unit,
+
+-   Predicted $y$ directly increases by $\hat{\beta_1}$ units (ceteris paribus effect, Equ. 3.6).
+
+-   Predicted $x_2$ increases by $\tilde{\delta_1}$ units (see Equ. 3.9).
+
+-   Each of these $\tilde{\delta_1}$ units leads to an increase of predicted y by $\hat{\beta_2}$ units, giving a total indirect effect of $\tilde{\delta_1}\hat{\beta_2}$ (see again Equ. 3.6)
+
+-   The overall effect $\tilde{\beta_1}$ is the sum of the direct and indirect effects (see Equ. 3.8)
+
+We revisit Example 3.1 to see whether we can demonstrate equation 3.8. We study the *ceteris paribus* effect of $ACT$ on $colGPA$ which has an estimated value of $\hat{\beta_1}$ = 0.0094. The estimated effect of $hsGPA$ is $\hat{\beta_2}$ = 0.453. The slope parameter of the regression corresponding to Eq. 3.9 is $\tilde{\delta_1}$ = 0.0389. Plugging these values into Equ. 3.8 gives a total effect of $\tilde{\beta_1}$ = 0.0271 which is exactly what the simple regression at the end of the output delivers.
+
+```{r}
+data(gpa1, package='wooldridge')
+# Parameter estimates for full and simple model:
+beta.hat <- coef( lm(colGPA ~ ACT+hsGPA, data=gpa1) )
+beta.hat
+
+# Relation between regressors:
+delta.tilde <- coef( lm(hsGPA ~ ACT, data=gpa1) )
+delta.tilde
+
+# Omitted variables formula for beta1.tilde:
+beta.hat["ACT"] + beta.hat["hsGPA"]*delta.tilde["ACT"]
+
+# Actual regression with hsGPA omitted:
+lm(colGPA ~ ACT, data=gpa1)
+```
+
+In this example, the indirect effect is actually stronger than the direct effect. $ACT$ predicts $colGPA$ mainly because it is related to $hsGPA$ which in turn is strongly related to $colGPA$. These relations hold for the estimates from a given sample. In Section 3.3, Wooldridge (2019) discusses how to apply the same sort of arguments to the OLS estimators which are random variables varying over different samples. Omitting relevant regressors causes bias if we are interested in estimating partial effects. In practice, it is difficult to include all relevant regressors making of omitted variables a prevalent problem. It is important enough to have motivated a vast amount of methodological and applied research. More advanced techniques like instrumental variables or panel data methods try to solve the problem in cases where we cannot add all relevant regressors, for example because they are unobservable.
+
+## 3.3 Standard Errors, Multicollinarity, and VIF
+
+We have already seen the matrix formula for the conditional variance-covariance matrix under the usual assumptions including homoscedasticity (MLR.5) in Equation 3.5. Theorem 3.2 provides an other useful formula for the variance of a single parameter j, i.e. for a single element on the main diagonal of the variance-covariance matrix:
+
+$$
+Var(\hat{\beta_j}) = \frac{\sigma^2}{SST_j(1-R^2_j)} = \frac{1}{n} \cdot \frac{\sigma^2}{Var(x_j)} \cdot \frac{1}{1-R^2_j} \tag{3.20}
+$$
+
+where $SST_j = \sum^{n}_{i=1} (x_{ij} - \bar{x_j})^2 = (n-1) \cdot Var(x_j)$ is the total sum of squares and $R^2_j$ is the usual coefficient of determination from a regression of $x_j$ on all of the other regressors.
+
+The variance of $\hat{\beta_j}$ consists of four parts:
+
+-   $\frac{1}{n}$: The variance is smaller for larger samples.
+
+-   $\sigma^2$: The variance is larger if the error term varies a lot, since it introduces randomness into the relationship between the variables of interest.
+
+-   $\frac{1}{Var(x_j)}$: The variance is smaller if the regressor $x_j$ varies a lot since this provides relevant information about the relationship.
+
+-   $\frac{1}{1-R^2_j}$: This variance inflation factor (VIF) accounts for (imperfect) multicollinearity. If $x_j$ is highly related to the other regressors, $R^2_j$ and therefore also $VIF_j$ and the variance of $\hat{\beta_1}$ are large.
+
+Since the error variance $\sigma^2$ is unknown, we replace it with an estimate to come up with an estimated variance of the parameter estimate. Its square root is the standard error $$
+se(\hat{\beta_j}) = \frac{1}{\sqrt{n}} \cdot \frac{\hat{\sigma}}{sd(x_j)} \cdot \frac{1}{\sqrt{1-R^2_j}}
+$$ It is not directly obvious that this formula leads to the same results as the matrix formula in Equation 3.5. We will validate this formula by replicating Example 3.1 which we also used for manually calculating the SE using the matrix formula above. We also use this example to demonstrate how to extract results which are reported by the **summary** of the **lm** results. Given its results are stored in variable **sures** using the results of **sures \<- summary(lm(...))**, we can easily access the results using **sures\$resultname** where the $resultname$ can be any of the following:
+
+-   **coefficients** for a matrix of the regression table (including coefficients, SE, ...)
+
+-   **residuals** for a vector of residuals
+
+-   **sigma** for the SER
+
+-   **r.squared** for R2
+
+-   and more using *names(sures)*
+
+```{r}
+data(gpa1, package = 'wooldridge')
+# Full estimation results including automatic SE :
+res <- lm(colGPA ~ hsGPA + ACT, data = gpa1)
+summary(res)
+
+# Extract SER (instead of calculation via residuals)
+(SER <- summary(res)$sigma)
+# regressing hsGPA on ACT for calculation of R2 & VIF
+(R2.hsGPA <- summary(lm(hsGPA ~ ACT, data = gpa1))$r.squared)
+(VIF.hsGPA <- 1 / (1 - R2.hsGPA))
+# manual calculation of SE of hsGPA coefficient:
+n <- nobs(res)
+sdx <- sd(gpa1$hsGPA) * sqrt((n - 1) / n) # (Note: sd() uses the (n-1) version)
+(SE.hsGPA <- 1 / sqrt(n) * SER / sdx * sqrt(VIF.hsGPA))
+ 
+```

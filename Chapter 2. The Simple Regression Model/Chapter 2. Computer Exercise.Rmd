@@ -1,0 +1,33 @@
+
+## C1
+```{r}
+library(wooldridge)
+```
+
+```{r message=FALSE}
+data(k401k, package='wooldridge')
+attach(k401k)
+mean(prate)
+mean(mrate)
+```
+```{r}
+prate_reg = lm(prate~mrate)
+summary(prate_reg)
+```
+```{r}
+new_mrate <- 3.5
+predic_prate <- predict(prate_reg, newdata = data.frame(x = new_mrate))
+print(predic_prate)
+```
+
+
+```{r}
+detach(k401k)
+```
+
+## C3
+```{r}
+data(sleep75, package="wooldridge")
+
+```
+

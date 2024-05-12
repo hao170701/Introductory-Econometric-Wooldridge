@@ -1,5 +1,5 @@
 ---
-title: "Chapter 2. The Simple Regression ModelModel"
+title: "Chapter 2. The Simple Regression Model"
 output:
   html_notebook: default
   pdf_document: default
@@ -108,7 +108,7 @@ CEOregres <- lm( sal ~ roe )
 sal.hat <- fitted(CEOregres)
 u.hat <- resid(CEOregres)
 # Wooldridge, Table 2.2:
-cbind(roe, sal, sal.hat, u.hat)[1:15,]
+cbind(roe, sal, sal.hat, u.hat)[1:15,] 
 ```
 
 ### Three properties of OLS statistic
