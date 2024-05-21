@@ -1,0 +1,32 @@
+---
+title: "Chapter 3. Excercise"
+output:
+  html_notebook: default
+---
+
+```{r}
+library('wooldridge')
+library('pander')
+```
+
+
+# Problem
+
+## 1.
+```{r}
+GPA2 <- data(gpa2, package = 'wooldridge')
+
+colgpa_reg <- lm(colgpa ~ hsperc + sat, data = gpa2)
+
+summary(colgpa_reg)
+
+```
+#### (i) Why does it make sense for the coefficient on hsperc to be negative?
+$hsperc$ is the percentile in the high school graduating class (for example: $hsperc$ = 5 means the top 5% of the class). So the lower the $hsperc% be, the higher the initiate academic ability of the student, so the coefficient on $hsperc$ is negative.
+
+#### (ii) What is the predicted college GPA when hsperc = 20 and sat = 1050
+```{r}
+predicted_gpa <- predict(colgpa_reg, data.frame(hsperc = 20, sat = 1050))
+cat(predicted_gpa)
+```
+
